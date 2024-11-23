@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import "./Game.css";
+import d0 from "../../Images/dice_0.png";
 import d1 from "../../Images/dice_1.png";
 import d2 from "../../Images/dice_2.png";
 import d3 from "../../Images/dice_3.png";
@@ -11,10 +12,26 @@ import d6 from "../../Images/dice_6.png";
 const Game = () => {
   const arrNo = [1, 2, 3, 4, 5, 6];
   const [selNo, setSelNo] = useState(0);
-  console.log(selNo);
+  const random = Math.ceil(Math.random() * 6);
+  const [total, setTotal] = useState(0);
+  console.log(random);
 
   function myChoice() {
-    pass;
+    if (selNo === 0) {
+      document.getElementById("warning").style.display = "block";
+      return;
+    } else {
+      document.getElementById("warning").style.display = "none";
+    }
+    if (selNo === random) {
+      setTotal(total + selNo);
+    } else {
+      setTotal(total - 1);
+    }
+  }
+  function reset() {
+    setSelNo(0);
+    setTotal(0);
   }
   return (
     <div>
@@ -23,17 +40,17 @@ const Game = () => {
           <div className="row">
             <div className="col-6">
               <div className="total-score">
-                <h1>0</h1>
+                <h1>{total}</h1>
                 Total Score
               </div>
             </div>
             <div className="col-6">
               <div className="selete">
-                <span>Plz chose the number</span>
+                <span id="warning">Plz chose the number</span>
                 <div>
                   {arrNo.map((value, index) => (
                     <Box
-                      isSelected={value === selNo}
+                      isselected={value === selNo}
                       onClick={() => setSelNo(value)}
                       key={index}
                     >
@@ -49,9 +66,13 @@ const Game = () => {
           <div className="row">
             <div className="col-12">
               <div className="dice">
-                <img src={d1} alt="" />
+                <img
+                  onClick={myChoice}
+                  src={"/src/assets/Images/dice_" + random + ".png"}
+                  alt=""
+                />
                 <h1>Click on Dice to roll</h1>
-                <button>Reset Score</button>
+                <button onClick={reset}>Reset Score</button>
                 <button>Show Rules</button>
               </div>
             </div>
@@ -84,8 +105,8 @@ const Box = styled.div`
   border: 1px solid black;
   width: 50px;
   padding: 10px 20px;
-  background-color: ${(props) => (props.isSelected ? "black" : "white")};
-  color: ${(props) => (props.isSelected ? "white" : "black")};
+  background-color: ${(props) => (props.isselected ? "black" : "white")};
+  color: ${(props) => (props.isselected ? "white" : "black")};
   margin: 0 10px;
   display: inline-block;
 `;
