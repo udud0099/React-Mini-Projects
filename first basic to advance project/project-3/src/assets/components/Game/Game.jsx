@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState } from "react";
+import styled from "styled-components";
 import "./Game.css";
 import d1 from "../../Images/dice_1.png";
 import d2 from "../../Images/dice_2.png";
@@ -8,6 +9,10 @@ import d5 from "../../Images/dice_5.png";
 import d6 from "../../Images/dice_6.png";
 
 const Game = () => {
+  const arrNo = [1, 2, 3, 4, 5, 6];
+  const [selNo, setSelNo] = useState(0);
+  console.log(selNo);
+
   function myChoice() {
     pass;
   }
@@ -25,13 +30,16 @@ const Game = () => {
             <div className="col-6">
               <div className="selete">
                 <span>Plz chose the number</span>
-                <div className="allnumber">
-                  <button onClick={myChoice}>1</button>
-                  <button onClick={myChoice}>2</button>
-                  <button onClick={myChoice}>3</button>
-                  <button onClick={myChoice}>4</button>
-                  <button onClick={myChoice}>5</button>
-                  <button onClick={myChoice}>6</button>
+                <div>
+                  {arrNo.map((value, index) => (
+                    <Box
+                      isSelected={value === selNo}
+                      onClick={() => setSelNo(value)}
+                      key={index}
+                    >
+                      {value}
+                    </Box>
+                  ))}
                 </div>
                 <h4>Select Number</h4>
               </div>
@@ -71,3 +79,13 @@ const Game = () => {
 };
 
 export default Game;
+
+const Box = styled.div`
+  border: 1px solid black;
+  width: 50px;
+  padding: 10px 20px;
+  background-color: ${(props) => (props.isSelected ? "black" : "white")};
+  color: ${(props) => (props.isSelected ? "white" : "black")};
+  margin: 0 10px;
+  display: inline-block;
+`;
