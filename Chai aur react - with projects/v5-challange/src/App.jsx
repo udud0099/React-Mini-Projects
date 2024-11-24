@@ -8,12 +8,16 @@ function App() {
 
   function inc() {
     if (noSel < 20) {
-      setNoSel(noSel + 1);
+      setNoSel((per) => per + 1);
+      setNoSel((per) => per + 1);
+      setNoSel((per) => per + 1);
     }
   }
   function dec() {
-    if (noSel > 0 ) {
-      setNoSel(noSel - 1);
+    if (noSel > 0) {
+      setNoSel((per) => per - 1);
+      setNoSel((per) => per - 1);
+      setNoSel((per) => per - 1);
     }
   }
   return (
