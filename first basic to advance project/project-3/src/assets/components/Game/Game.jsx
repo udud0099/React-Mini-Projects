@@ -12,10 +12,13 @@ import d6 from "../../Images/dice_6.png";
 const Game = () => {
   const arrNo = [1, 2, 3, 4, 5, 6];
   const [selNo, setSelNo] = useState(0);
-  const random = Math.ceil(Math.random() * 6);
   const [total, setTotal] = useState(0);
-  console.log(random);
+  // console.log(selNo);
 
+  const [imgNo, setImgNo] = useState(0);
+  const random = () => {
+    return Math.ceil(Math.random() * 6);
+  };
   function myChoice() {
     if (selNo === 0) {
       document.getElementById("warning").style.display = "block";
@@ -29,6 +32,7 @@ const Game = () => {
       setTotal(total - 1);
     }
   }
+  console.log(imgNo);
   function reset() {
     setSelNo(0);
     setTotal(0);
@@ -68,7 +72,7 @@ const Game = () => {
               <div className="dice">
                 <img
                   onClick={myChoice}
-                  src={"/src/assets/Images/dice_" + random + ".png"}
+                  src={`/src/assets/Images/dice_${imgNo}.png`}
                   alt=""
                 />
                 <h1>Click on Dice to roll</h1>
