@@ -4,7 +4,8 @@ import Mytry from "./components/Mytry/Mytry";
 function App() {
   return (
     <>
-      <Mytry />
+      {/* <Mytry /> */}
+      <h1>try next time</h1>
     </>
   );
 }
